@@ -74,14 +74,57 @@
 
     <section class="contact" id="contact">
       <div class="contact-inner"><div><p class="eyebrow">LET'S TALK ABOUT YOUR DATE</p><h2>Your next chapter<br>starts <em>here.</em></h2><p>Tell us what you're celebrating. We'll get back to you to discuss availability and packages.</p></div>
-      <form id="booking-form">
-        <label for="name">Your name</label><input id="name" name="name" placeholder="Full name" required>
-        <label for="event">Type of shoot</label><select id="event" name="event"><option>Wedding</option><option>Pre-wedding</option><option>Portrait</option><option>Event</option><option>Brand / Product</option><option>Other</option></select>
-        <label for="date">Event date (optional)</label><input id="date" name="date" type="date">
-        <label for="message">A few details</label><textarea id="message" name="message" rows="3" placeholder="Location, timings, what you need…"></textarea>
-        <button class="button button-gold" type="submit">Enquire on WhatsApp ↗</button>
-        <small class="form-help">This form opens WhatsApp with your enquiry. Add your WhatsApp number in script.js first.</small>
-      </form></div>
+      
+<form id="booking-form">
+  <label for="name">Your name</label>
+  <input id="name" name="name"
+    placeholder="Full name" required>
+
+  <label for="event">Type of shoot</label>
+  <select id="event" name="event">
+    <option>Wedding</option>
+    <option>Pre-wedding</option>
+    <option>Portrait</option>
+    <option>Event</option>
+    <option>Brand / Product</option>
+    <option>Other</option>
+  </select>
+
+  <label for="city">Select city</label>
+  <select id="city" name="city" required>
+    <option value="">Choose your city</option>
+    <option value="Bengaluru">Bengaluru</option>
+    <option value="Mysuru">Mysuru</option>
+    <option value="Mangaluru">Mangaluru</option>
+    <option value="Hubballi">Hubballi</option>
+    <option value="Belagavi">Belagavi</option>
+    <option value="Kalaburagi">Kalaburagi</option>
+    <option value="Yadgir">Yadgir</option>
+    <option value="Other">Other city</option>
+  </select>
+
+  <label for="place">Famous place / Shoot location</label>
+  <select id="place" name="place" required disabled>
+    <option value="">First select a city</option>
+  </select>
+
+  <label for="date">Event date (optional)</label>
+  <input id="date" name="date" type="date">
+
+  <label for="message">A few details</label>
+  <textarea id="message" name="message"
+    rows="3"
+    placeholder="Timing, ideas, special requests..."></textarea>
+
+  <button class="button button-gold" type="submit">
+    Enquire on WhatsApp ↗
+  </button>
+
+  <small class="form-help">
+    Your enquiry will open in WhatsApp for confirmation.
+  </small>
+</form>
+
     </section>
   </main>
 
