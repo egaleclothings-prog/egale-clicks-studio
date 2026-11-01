@@ -39,6 +39,54 @@ if (citySelect && placeSelect) {
   });
 }
 
+const placeGallery = document.querySelector("#place-cards");
+
+const placeImages = {
+  Bengaluru: {
+    "Lalbagh Botanical Garden": "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8",
+    "Cubbon Park": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+    "Bangalore Palace": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23"
+  },
+  Mysuru: {
+    "Mysore Palace": "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
+    "Brindavan Gardens": "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8"
+  }
+};
+
+function showPlaceCards(city) {
+  if (!placeGallery) return;
+
+  const places = placeImages[city] || {};
+  placeGallery.innerHTML = "";
+
+  Object.entries(places).forEach(([name, photo]) => {
+    const card = document.createElement("div");
+    card.style.cssText = "border:1px solid #d8b56d;border-radius:12px;padding:10px;margin:10px 0;color:#d8b56d";
+
+    const img = document.createElement("img");
+    img.src = photo;
+    img.alt = name;
+    img.style.cssText = "width:100%;height:150px;object-fit:cover;border-radius:8px";
+
+    const title = document.createElement("p");
+    title.textContent = name;
+
+    card.append(img, title);
+    card.onclick = () => {
+      placeSelect.value = name;
+      placeSelect.dispatchEvent(new Event("change"));
+    };
+
+    placeGallery.appendChild(card);
+  });
+}
+
+if (citySelect) {
+  citySelect.addEventListener("change", () => {
+    showPlaceCards(citySelect.value);
+  });
+}
+
 if (form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
