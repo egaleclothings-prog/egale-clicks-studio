@@ -41,42 +41,94 @@ if (citySelect && placeSelect) {
 
 const placeGallery = document.querySelector("#place-cards");
 
-const placeImages = {
-  Bengaluru: {
-    "Lalbagh Botanical Garden": "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8",
-    "Cubbon Park": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-    "Bangalore Palace": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23"
-  },
-  Mysuru: {
-    "Mysore Palace": "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
-    "Brindavan Gardens": "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8"
-  }
+const placeDetails = {
+  Bengaluru: [
+    {
+      name: "Lalbagh Botanical Garden",
+      info: "Nature and pre-wedding photography location.",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
+    },
+    {
+      name: "Cubbon Park",
+      info: "Beautiful green surroundings for portraits.",
+      image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8"
+    },
+    {
+      name: "Bangalore Palace",
+      info: "Royal architecture and premium portraits.",
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23"
+    }
+  ],
+
+  Mysuru: [
+    {
+      name: "Mysore Palace",
+      info: "Royal architecture and traditional photography.",
+      image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742"
+    },
+    {
+      name: "Brindavan Gardens",
+      info: "Garden and couple photography.",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
+    }
+  ],
+
+  Mangaluru: [
+    {
+      name: "Tannirbhavi Beach",
+      info: "Beach and sunset photography.",
+      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
+    },
+    {
+      name: "Panambur Beach",
+      info: "Beautiful coastal photography.",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+    },
+    {
+      name: "Sultan Battery",
+      info: "Historic waterfront location.",
+      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b"
+    }
+  ]
 };
 
 function showPlaceCards(city) {
   if (!placeGallery) return;
 
-  const places = placeImages[city] || {};
   placeGallery.innerHTML = "";
 
-  Object.entries(places).forEach(([name, photo]) => {
+  const places = placeDetails[city] || [];
+
+  places.forEach(place => {
     const card = document.createElement("div");
-    card.style.cssText = "border:1px solid #d8b56d;border-radius:12px;padding:10px;margin:10px 0;color:#d8b56d";
+
+    card.style.cssText =
+      "background:#111;border:1px solid #d8b56d;border-radius:14px;padding:12px;margin:12px 0;color:#fff;";
 
     const img = document.createElement("img");
-    img.src = photo;
-    img.alt = name;
-    img.style.cssText = "width:100%;height:150px;object-fit:cover;border-radius:8px";
+    img.src = place.image;
+    img.alt = place.name;
+    img.style.cssText =
+      "width:100%;height:180px;object-fit:cover;border-radius:10px;";
 
-    const title = document.createElement("p");
-    title.textContent = name;
+    const title = document.createElement("h3");
+    title.textContent = place.name;
+    title.style.color = "#d8b56d";
 
-    card.append(img, title);
-    card.onclick = () => {
-      placeSelect.value = name;
+    const info = document.createElement("p");
+    info.textContent = place.info;
+
+    const btn = document.createElement("button");
+    btn.textContent = "Select Location";
+    btn.style.cssText =
+      "background:#d8b56d;color:#111;padding:12px;border:0;border-radius:6px;width:100%;font-weight:bold;";
+
+    btn.addEventListener("click", () => {
+      placeSelect.value = place.name;
       placeSelect.dispatchEvent(new Event("change"));
-    };
+    });
 
+    card.append(img, title, info, btn);
     placeGallery.appendChild(card);
   });
 }
@@ -85,7 +137,10 @@ if (citySelect) {
   citySelect.addEventListener("change", () => {
     showPlaceCards(citySelect.value);
   });
+
+  showPlaceCards(citySelect.value);
 }
+
 
 if (form) {
   form.addEventListener("submit", (event) => {
